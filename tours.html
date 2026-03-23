@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR TOURS AND TRAVELS | Loni Kalbhor, Pune</title>
+    <!-- Google Fonts for Modern Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Branding Colors */
+            --primary-color: #0d47a1;
+            /* Deep Blue */
+            --primary-light: #1565c0;
+            --secondary-color: #ffc107;
+            /* Golden Yellow */
+            --text-color: #333333;
+            --text-light: #666666;
+            --bg-light: #f4f7f6;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name-en {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 0.5px;
+        }
+
+        .brand-name-mr {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .call-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(13, 71, 161, 0.3);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .call-btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(13, 71, 161, 0.4);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(135deg, rgba(13, 71, 161, 0.85), rgba(21, 101, 192, 0.75)),
+                url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            color: var(--white);
+            padding: 8rem 5% 10rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .badge-rating {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.8s ease backwards;
+        }
+
+        .star-icon {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 1s ease backwards 0.2s;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            opacity: 0.9;
+            animation: fadeInDown 1s ease backwards 0.4s;
+        }
+
+        .hero-cta {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            font-size: 1.1rem;
+            padding: 1rem 2.5rem;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            animation: fadeInDown 1s ease backwards 0.6s;
+        }
+
+        .hero-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 193, 7, 0.4);
+        }
+
+        /* --- Floating Feature Cards --- */
+        .features-wrapper {
+            margin-top: -5rem;
+            padding: 0 5%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-box {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--primary-color);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-box h3 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-box p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* --- Sections Formatting --- */
+        .section {
+            padding: 6rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* --- Services --- */
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-content {
+            padding: 2.5rem;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 1rem;
+        }
+
+        .service-list {
+            list-style: none;
+        }
+
+        .service-list li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--text-color);
+            font-size: 1.05rem;
+        }
+
+        .service-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--secondary-color);
+            font-weight: 800;
+            font-size: 1.2rem;
+            background: rgba(255, 193, 7, 0.1);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- Photo Gallery --- */
+        .gallery-section {
+            background-color: var(--white);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* --- Testimonials --- */
+        .testimonials-bg {
+            background-color: var(--white);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            background: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: 16px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .review-card:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .review-card:hover .reviewer-name,
+        .review-card:hover .review-text,
+        .review-card:hover .review-meta {
+            color: var(--white);
+        }
+
+        .quote-icon {
+            font-size: 4rem;
+            color: rgba(13, 71, 161, 0.1);
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            line-height: 1;
+            font-family: serif;
+        }
+
+        .review-card:hover .quote-icon {
+            color: rgba(255, 255, 255, 0.1);
+        }
+
+        .stars-container {
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-size: 1.05rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-light);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .reviewer-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .reviewer-name {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .review-meta {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--primary-color);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 5rem 5% 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .footer-logo {
+            color: var(--white);
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-logo-mr {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .contact-info li {
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-top: 2px;
+        }
+
+        .map-wrapper {
+            border-radius: 12px;
+            overflow: hidden;
+            height: 250px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero {
+                padding: 6rem 5% 8rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-wrapper {
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <header>
+        <div class="brand">
+            <span class="brand-name-en">VR TOURS & TRAVELS</span>
+            <span class="brand-name-mr">व्हीआर टूर्स अँड ट्रॅव्हल्स</span>
+        </div>
+        <a href="tel:+919168361609" class="call-btn">
+            <span>📞</span> 091683 61609
+        </a>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="badge-rating">
+            <span class="star-icon">★★★★★</span> 5.0 (36 Google Reviews)
+        </div>
+        <h1>Your Ultimate Travel Companion in Pune</h1>
+        <p>Experience comfortable, reliable, and affordable local & outstation travel with zero hidden charges. Driven
+            by professionalism and customer satisfaction.</p>
+        <a href="http://wa.me/919168361609" class="hero-cta">Book Your Ride Now</a>
+    </section>
+    <!-- Floating Features -->
+    <div class="features-wrapper">
+        <div class="features-grid">
+            <div class="feature-box">
+                <div class="feature-icon">🕒</div>
+                <h3>Open 24 Hours</h3>
+                <p>We operate round-the-clock for your convenience. Early morning or late night, we are just a call
+                    away.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Confirmation</h3>
+                <p>Hassle-free booking with instant mobile tickets and immediate confirmation for your complete peace of
+                    mind.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">🌈</div>
+                <h3>LGBTQ+ Friendly</h3>
+                <p>We guarantee a safe, welcoming, and inclusive travel environment for all our esteemed guests.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Services Section -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Our Premium Services</h2>
+            <p class="section-subtitle">Whether you need a quick ride across town or a comfortable journey to a distant
+                city, we've got you covered with our top-tier fleet.</p>
+        </div>
+        <div class="services-container">
+            <!-- Local Travels -->
+            <div class="service-card">
+                <div class="service-content">
+                    <h3 class="service-title">Local Travels (Pune)</h3>
+                    <ul class="service-list">
+                        <li>Well-maintained, AC & Non-AC cars</li>
+                        <li>Professional & polite drivers</li>
+                        <li>Doorstep pickup and drop service</li>
+                        <li>Affordable pricing with transparent billing</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Outstation Travels -->
+            <div class="service-card">
+                <div class="service-content">
+                    <h3 class="service-title">Tour & Outstation</h3>
+                    <ul class="service-list">
+                        <li>Shivneri, Lenyadri, Ozar & Ranjangav trips</li>
+                        <li>Comfortable fleet for long journeys</li>
+                        <li>Starting at an attractive rate of ₹12/km</li>
+                        <li>Carefully planned itineraries</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Why Choose Us -->
+            <div class="service-card">
+                <div class="service-content">
+                    <h3 class="service-title">Why Choose Mr. Ram?</h3>
+                    <ul class="service-list">
+                        <li>Direct supervision and care by the owner</li>
+                        <li>No sudden breakdowns – pristine vehicles</li>
+                        <li>Unmatched 5-Star rating on Google</li>
+                        <li>Highly praised "Gentle Behavior" by clients</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Photo Gallery Section -->
+    <section class="section gallery-section">
+        <div class="section-header">
+            <h2 class="section-title">Tour Highlights & Destinations</h2>
+            <p class="section-subtitle">Glimpses of the beautiful historical forts, ancient temples, and natural scenery
+                we cover on our trips.</p>
+        </div>
+        <div class="gallery-grid">
+            <!-- Save your photos in an "images" folder next to this file, named photo1.jpg through photo6.jpg -->
+            <div class="gallery-item">
+                <img src="images/imagesphoto1.png" alt="Tour Highlight 1">
+            </div>
+            <div class="gallery-item">
+                <img src="images/imagesphoto2.png" Tour Highlight 2">
+            </div>
+            <div class="gallery-item">
+                <img src="images/imagesphoto3.png" alt="Tour Highlight 3">
+            </div>
+            <div class="gallery-item">
+                <img src="images/imagesphoto4.png" alt="Tour Highlight 4">
+            </div>
+            <div class="gallery-item">
+                <img src="images/imagesphoto5.png" alt="Tour Highlight 5">
+            </div>
+            <div class="gallery-item">
+                <img src="images/imagesphoto6.png" alt="Tour Highlight 6">
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials-bg">
+        <div class="section-header">
+            <h2 class="section-title">Hear From Our Happy Travelers</h2>
+            <p class="section-subtitle">Read real reviews from our verified customers who have experienced our service
+                firsthand.</p>
+        </div>
+        <div class="reviews-grid">
+            <!-- Review 1 -->
+            <div class="review-card">
+                <div class="quote-icon">"</div>
+                <div class="stars-container">★★★★★</div>
+                <p class="review-text">"Very good service, car was well maintained. Owner Mr. Ram is too polite and
+                    friendly in Nature. We did Shivneri-Lenyadri - Ozar- Ranjangav trip with him. Highly recommended 👍"
+                </p>
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">M</div>
+                    <div class="reviewer-details">
+                        <span class="reviewer-name">Mahendra Mestry</span>
+                        <span class="review-meta">Local Guide • 301 reviews</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Review 2 -->
+            <div class="review-card">
+                <div class="quote-icon">"</div>
+                <div class="stars-container">★★★★★</div>
+                <p class="review-text">"Memorable trip, comfortable driving, so gentle behavior and rate is very low
+                    with no hidden charge... 😊 Quality service provided all around!"</p>
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">A</div>
+                    <div class="reviewer-details">
+                        <span class="reviewer-name">Ashutosh Singh</span>
+                        <span class="review-meta">Local Guide • 18 reviews</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Review 3 -->
+            <div class="review-card">
+                <div class="quote-icon">"</div>
+                <div class="stars-container">★★★★★</div>
+                <p class="review-text">"Very good service, car was well maintained.. No issues at all whatsoever.
+                    Positive response from the team. Thank you!"</p>
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">S</div>
+                    <div class="reviewer-details">
+                        <span class="reviewer-name">Saurabh Dolare</span>
+                        <span class="review-meta">Local Guide • 12 reviews</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="footer-logo">VR TOURS & TRAVELS</div>
+                <div class="footer-logo-mr">वर टूर्स एंड ट्रेवल्स</div>
+                <p>Your one-stop destination for seamless local and outstation travel. We deliver comfort, safety, and a
+                    premium travel experience in and around Pune.</p>
+            </div>
+            <div class="footer-contact">
+                <h3 style="color: var(--white); margin-bottom: 1.5rem; font-size: 1.3rem;">Contact Info</h3>
+                <ul class="contact-info">
+                    <li>
+                        <span class="contact-icon">📍</span>
+                        <span>Ghorpade Wasti Rd, Kadam Wasti,<br>Pune, Kadamwak Wasti,<br>Maharashtra 412201
+                            (F2M9+QJ)</span>
+                    </li>
+                    <li>
+                        <span class="contact-icon">📞</span>
+                        <a href="tel:+919168361609" style="color: inherit; text-decoration: none;">091683 61609</a>
+                    </li>
+                    <li>
+                        <span class="contact-icon">🕒</span>
+                        <span>Open 24 Hours, Monday to Sunday</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-map">
+                <!-- Location Map Placeholder using static embed -->
+                <div class="map-wrapper">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.5042469420063!2d74.0084!3d18.5188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c3a50e932ec1%3A0xe5a3c9b3a3ab8007!2sKadamwak%20Wasti%2C%20Maharashtra%20412201!5e0!3m2!1sen!2sin!4v1680000000000!5m2!1sen!2sin"
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 VR TOURS AND TRAVELS. Designed with ❤️. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
